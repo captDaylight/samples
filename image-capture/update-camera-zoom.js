@@ -15,14 +15,14 @@ navigator.mediaDevices.getUserMedia({video: true})
   const input = document.querySelector('input[type="range"]');
 
   // Check whether zoom is supported or not.
-  if (!('zoom' in capabilities)) {
-    return Promise.reject('Zoom is not supported by ' + track.label);
+  if (!('focusDistance' in capabilities)) {
+    return Promise.reject('Focus is not supported by ' + track.label);
   }
 
   // Map zoom to a slider element.
-  input.min = capabilities.zoom.min;
-  input.max = capabilities.zoom.max;
-  input.step = capabilities.zoom.step;
+  input.min = capabilities.focusDistance.min;
+  input.max = capabilities.focusDistance.max;
+  input.step = capabilities.focusDistance.step;
   input.value = settings.zoom;
   input.oninput = function(event) {
     track.applyConstraints({advanced: [ {zoom: event.target.value} ]});
